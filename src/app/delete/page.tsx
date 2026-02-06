@@ -80,17 +80,17 @@ export default function DeletePage() {
             {message}
           </p>
         )}
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           <button
             type="submit"
             disabled={status === 'loading'}
-            className="px-4 py-2 rounded-lg bg-red-900/80 hover:bg-red-800 text-red-100 font-medium text-sm disabled:opacity-50"
+            className="px-4 py-2.5 rounded-lg bg-red-900/80 hover:bg-red-800 text-red-100 font-medium text-sm disabled:opacity-50 min-h-[44px] touch-manipulation"
           >
             {status === 'loading' ? 'Taking back…' : 'Take my story back'}
           </button>
           <Link
             href="/"
-            className="px-4 py-2 rounded-lg border border-neutral-600 hover:bg-neutral-800 text-neutral-300 text-sm inline-block"
+            className="px-4 py-2.5 rounded-lg border border-neutral-600 hover:bg-neutral-800 text-neutral-300 text-sm inline-flex items-center min-h-[44px] touch-manipulation"
           >
             Cancel
           </Link>

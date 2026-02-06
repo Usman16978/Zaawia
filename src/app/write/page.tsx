@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { STORY_CATEGORIES } from '@/lib/categories';
 import { CAROUSEL_IMAGES } from '@/lib/carousel-images';
+import { Theme } from 'emoji-picker-react';
 
 const EmojiPicker = dynamic(
   () => import('emoji-picker-react').then((mod) => mod.default),
@@ -151,7 +152,7 @@ export default function WritePage() {
     <div className="w-full grid grid-cols-1 lg:grid-cols-[min(28rem,100%)_1fr] gap-0 min-h-[60vh]">
       <div className="max-w-md">
       {/* Safe zone: frosted glass card — "Main yahan mehfooz hoon." */}
-      <div className="safe-zone-card rounded-2xl p-6 sm:p-8">
+      <div className="safe-zone-card rounded-2xl p-4 sm:p-6 md:p-8">
         <h1 className="text-xl font-semibold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-amber-300 to-rose-400">
           Write your story
         </h1>
@@ -232,7 +233,7 @@ export default function WritePage() {
               </button>
             </div>
             {showEmojiPicker && (
-              <div className="absolute left-0 top-full mt-2 z-[100]">
+              <div className="absolute left-0 top-full mt-2 z-[100] max-w-[min(320px,calc(100vw-2rem)] overflow-x-auto">
                 <EmojiPicker
                   onEmojiClick={(emojiData) => {
                     const textarea = contentRef.current;
@@ -250,7 +251,7 @@ export default function WritePage() {
                       setContent(content + emoji);
                     }
                   }}
-                  theme="dark"
+                  theme={Theme.DARK}
                   width={320}
                   height={360}
                 />
@@ -258,24 +259,24 @@ export default function WritePage() {
             )}
           </div>
 
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-3">
             <button
               type="submit"
               disabled={submitting || !content.trim()}
-              className="px-4 py-2 bg-stone-700 hover:bg-stone-600 disabled:opacity-50 disabled:pointer-events-none rounded-lg text-sm font-medium text-stone-100 transition-colors"
+              className="px-4 py-2.5 bg-stone-700 hover:bg-stone-600 disabled:opacity-50 disabled:pointer-events-none rounded-lg text-sm font-medium text-stone-100 transition-colors min-h-[44px] touch-manipulation"
             >
               {submitting ? 'Publishing…' : 'Publish'}
             </button>
             <Link
               href="/"
-              className="px-4 py-2 border border-stone-600 hover:bg-stone-800 rounded-lg text-sm inline-block text-stone-300"
+              className="px-4 py-2.5 border border-stone-600 hover:bg-stone-800 rounded-lg text-sm inline-flex items-center min-h-[44px] text-stone-300 touch-manipulation"
             >
               Cancel
             </Link>
           </div>
         </form>
         {/* When emoji picker is open, add space so footer stays below and is not covered */}
-        {showEmojiPicker && <div className="min-h-[380px]" aria-hidden />}
+        {showEmojiPicker && <div className="min-h-[320px] sm:min-h-[380px]" aria-hidden />}
       </div>
       </div>
       {/* Right: memory wall — same images as home, heavy blur + dark overlay, slow fade */}

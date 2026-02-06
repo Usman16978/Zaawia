@@ -159,13 +159,13 @@ export function StoryCard({
         })}
       </time>
 
-      {/* Actions */}
-      <div className="mt-4 pt-3 border-t border-stone-700 flex flex-wrap items-center gap-4">
-        <div className="flex items-center gap-3">
+      {/* Actions — wrap on mobile, touch-friendly */}
+      <div className="mt-4 pt-3 border-t border-stone-700 flex flex-wrap items-center gap-3 sm:gap-4">
+        <div className="flex items-center gap-2 sm:gap-3 flex-wrap">
           <button
             type="button"
             onClick={() => toggleReaction('LIKE')}
-            className={`flex items-center gap-1.5 text-sm transition-colors ${userLiked ? 'text-amber-500' : 'text-stone-400 hover:text-amber-500/90'}`}
+            className={`flex items-center gap-1.5 text-sm transition-colors min-h-[44px] px-2 py-1.5 -mx-2 -my-1.5 rounded-lg touch-manipulation ${userLiked ? 'text-amber-500' : 'text-stone-400 hover:text-amber-500/90'}`}
           >
             <span aria-hidden>{userLiked ? '👍' : '👍'}</span>
             <span>{reactions.like}</span>
@@ -173,17 +173,17 @@ export function StoryCard({
           <button
             type="button"
             onClick={() => toggleReaction('MERE_SATH_BIHI')}
-            className={`flex items-center gap-1.5 text-sm transition-colors ${userMereSathBhi ? 'text-amber-500' : 'text-stone-400 hover:text-amber-500/90'}`}
+            className={`flex items-center gap-1.5 text-sm transition-colors min-h-[44px] px-2 py-1.5 -mx-2 -my-1.5 rounded-lg touch-manipulation ${userMereSathBhi ? 'text-amber-500' : 'text-stone-400 hover:text-amber-500/90'}`}
           >
             <span aria-hidden>{userMereSathBhi ? '🤝' : '🤝'}</span>
-            <span>Mere sath bhi</span>
+            <span className="hidden sm:inline">Mere sath bhi</span>
             <span className="text-stone-500">({reactions.mereSathBhi})</span>
           </button>
         </div>
         <button
           type="button"
           onClick={() => setShowComments(!showComments)}
-          className="text-stone-400 hover:text-amber-500/90 text-sm transition-colors"
+          className="text-stone-400 hover:text-amber-500/90 text-sm transition-colors min-h-[44px] inline-flex items-center px-2 py-1.5 -mx-2 -my-1.5 rounded-lg touch-manipulation"
         >
           {showComments ? 'Hide' : 'Comments'} ({commentsLoaded ? comments.length : (story._count?.comments ?? 0)})
         </button>
@@ -191,7 +191,7 @@ export function StoryCard({
           type="button"
           onClick={reportStory}
           disabled={reporting || reportDone}
-          className="text-stone-500 hover:text-red-400/90 text-xs transition-colors disabled:opacity-50 ml-auto"
+          className="text-stone-500 hover:text-red-400/90 text-xs transition-colors disabled:opacity-50 ml-auto min-h-[44px] inline-flex items-center px-2 py-1.5 -mx-2 -my-1.5 rounded-lg touch-manipulation"
         >
           {reportDone ? 'Reported' : reporting ? '…' : 'Report'}
         </button>
@@ -215,19 +215,19 @@ export function StoryCard({
               ))}
             </ul>
           )}
-          <form onSubmit={submitComment} className="flex gap-2">
+          <form onSubmit={submitComment} className="flex flex-col gap-2 sm:flex-row sm:gap-2">
             <input
               type="text"
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="Add a comment (anonymous)"
               maxLength={500}
-              className="flex-1 bg-stone-800 border border-stone-600 rounded-lg px-3 py-2 text-stone-100 placeholder-stone-500 text-sm focus:outline-none focus:ring 1px focus:ring-amber-600"
+              className="flex-1 min-w-0 bg-stone-800 border border-stone-600 rounded-lg px-3 py-2.5 text-stone-100 placeholder-stone-500 text-sm focus:outline-none focus:ring 1px focus:ring-amber-600 min-h-[44px]"
             />
             <button
               type="submit"
               disabled={submittingComment || !newComment.trim()}
-              className="px-3 py-2 rounded-lg bg-stone-700 hover:bg-stone-600 text-stone-200 text-sm disabled:opacity-50"
+              className="px-3 py-2.5 rounded-lg bg-stone-700 hover:bg-stone-600 text-stone-200 text-sm disabled:opacity-50 min-h-[44px] shrink-0 touch-manipulation"
             >
               {submittingComment ? '…' : 'Post'}
             </button>

@@ -48,9 +48,16 @@
   font-family: system-ui, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
 }
 
+html {
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   @apply text-stone-100 antialiased;
   background: #181512;
   min-height: 100vh;
   position: relative;
+  overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
 }

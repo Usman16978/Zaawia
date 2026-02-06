@@ -94,7 +94,7 @@ export default function AdminPage() {
 
   if (!isAdmin) {
     return (
-      <div className="max-w-md mx-auto py-10">
+      <div className="max-w-md mx-auto py-8 sm:py-10 px-2 sm:px-0">
         <h1 className="text-xl font-semibold text-stone-100 mb-4">Admin login</h1>
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
@@ -106,7 +106,7 @@ export default function AdminPage() {
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full rounded-lg bg-stone-800 border border-stone-600 px-3 py-2 text-stone-100 focus:outline-none focus:ring 1px focus:ring-amber-500"
+              className="w-full rounded-lg bg-stone-800 border border-stone-600 px-3 py-2.5 text-stone-100 focus:outline-none focus:ring 1px focus:ring-amber-500 min-h-[44px]"
               required
               autoComplete="current-password"
             />
@@ -114,7 +114,7 @@ export default function AdminPage() {
           {loginError && <p className="text-sm text-red-400">{loginError}</p>}
           <button
             type="submit"
-            className="px-4 py-2 rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 font-medium text-sm"
+            className="px-4 py-2.5 rounded-lg bg-amber-600 hover:bg-amber-500 text-stone-950 font-medium text-sm min-h-[44px] touch-manipulation"
           >
             Log in
           </button>
@@ -129,20 +129,20 @@ export default function AdminPage() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto py-8">
-      <div className="flex items-center justify-between gap-4 mb-6">
+    <div className="max-w-3xl mx-auto py-6 sm:py-8 px-2 sm:px-0">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4 mb-6">
         <h1 className="text-xl font-semibold text-stone-100">Admin — manage stories</h1>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 flex-wrap">
           <button
             type="button"
             onClick={handleLogout}
-            className="text-sm text-stone-400 hover:text-stone-200 border border-stone-600 px-3 py-1.5 rounded-lg hover:bg-stone-800"
+            className="text-sm text-stone-400 hover:text-stone-200 border border-stone-600 px-3 py-2 rounded-lg hover:bg-stone-800 min-h-[44px] touch-manipulation"
           >
             Log out
           </button>
           <Link
             href="/"
-            className="text-sm text-stone-400 hover:text-stone-200"
+            className="text-sm text-stone-400 hover:text-stone-200 px-3 py-2 rounded-lg min-h-[44px] inline-flex items-center touch-manipulation"
           >
             Back to feed
           </Link>
@@ -173,7 +173,7 @@ export default function AdminPage() {
                 type="button"
                 onClick={() => deleteStory(story.id)}
                 disabled={deletingId === story.id}
-                className="shrink-0 px-3 py-1.5 rounded-lg bg-red-900/80 hover:bg-red-800 text-red-100 text-sm disabled:opacity-50"
+                className="shrink-0 px-3 py-2 rounded-lg bg-red-900/80 hover:bg-red-800 text-red-100 text-sm disabled:opacity-50 min-h-[44px] touch-manipulation"
               >
                 {deletingId === story.id ? '…' : 'Delete'}
               </button>
