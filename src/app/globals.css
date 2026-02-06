@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes card-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(120, 113, 108, 0.2), 0 0 40px rgba(87, 83, 78, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(120, 113, 108, 0.28), 0 0 56px rgba(87, 83, 78, 0.14);
+  }
+}
+
+.animate-card-glow {
+  animation: card-glow 3s ease-in-out infinite;
+}
+
+/* Write page: safe zone frosted glass — "Main yahan mehfooz hoon." */
+.safe-zone-card {
+  background: rgba(20, 18, 15, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(120, 113, 108, 0.1);
+}
+
+/* Write page right side: memory wall — light blur, dark overlay */
+.memory-wall-blur {
+  filter: blur(12px);
+  -webkit-filter: blur(12px);
+}
+.memory-wall-transition {
+  transition-duration: 1s;
+}
+.memory-wall-overlay {
+  background: rgba(20, 15, 12, 0.78);
+}
+
+/* Story content: emoji support */
+.story-content {
+  font-family: system-ui, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+
+body {
+  @apply text-stone-100 antialiased;
+  background: #181512;
+  min-height: 100vh;
+  position: relative;
+}

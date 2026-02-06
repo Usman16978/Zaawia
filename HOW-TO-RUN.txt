@@ -1,0 +1,71 @@
+ZAAWIYA WEB — HOW TO RUN (PostgreSQL / server DB)
+
+1. Open terminal in folder: zaawiya-web
+
+2. Install dependencies (if not done):
+   npm install
+
+3. Database — PostgreSQL (server DB, fully integrated):
+
+   Option A — Local PostgreSQL
+   - Install PostgreSQL (https://www.postgresql.org/download/)
+   - Create a database, e.g. in psql: CREATE DATABASE zaawiya;
+   - Create .env from .env.example and set:
+     DATABASE_URL="postgresql://postgres:YOUR_PASSWORD@localhost:5432/zaawiya?schema=public"
+
+   Option B — Free cloud PostgreSQL (no local install)
+   - Neon: https://neon.tech — sign up, create project, copy connection string → DATABASE_URL in .env
+   - Supabase: https://supabase.com — create project, Settings → Database → connection string → DATABASE_URL in .env
+   - Railway / Render: create PostgreSQL add-on, copy DATABASE_URL to .env
+
+   Then run (creates tables and generates client):
+   npm run db:push
+   npm run db:seed
+
+4. Run dev server (syncs DB and starts app):
+   npm run dev
+
+5. Open in browser:
+   http://localhost:3000
+
+PAGES & ACTIONS
+- Home: feed of stories. Header: logo, Write, Take my story back, Search, Filter.
+- Write: /write — pick prompt or free write, publish, get delete link. Copy button to copy link. Then: Take my story back / Back to feed / Write another.
+- Delete my story: /delete — paste delete link (or ID + token), click Delete story.
+- Each story card: Like, Mere sath bhi, Comments (count always visible), Report, prompt tag.
+
+Database: PostgreSQL (server DB). Stories, comments, reactions, reports persist permanently. All users see the same data.
+
+IF STORIES DON'T SHOW OR PROMPTS MISSING
+- Run once: npm run db:seed
+- Ensure .env has correct DATABASE_URL and PostgreSQL is running (or cloud URL is reachable)
+- Restart: npm run dev
+
+ADMIN (moderate / delete any story)
+- Set ADMIN_PASSWORD in .env (at least 8 characters).
+- Open http://localhost:3000/admin — log in with that password.
+- You can delete any story (negative/inappropriate content). Deleted stories are removed permanently.
+- Normal users cannot access /admin without the password.
+
+BUILD FOR PRODUCTION
+- Set DATABASE_URL in production environment to your PostgreSQL URL
+- Set ADMIN_PASSWORD in production if you want admin access
+- npm run build
+- npm run start
+
+SHARE ONE URL (DEPLOY ONLINE — like one .exe link for everyone)
+To give one URL so anyone can open your site, see stories, write, like, comment:
+
+1. Put your code on GitHub (create repo, push zaawiya-web folder).
+
+2. Deploy on Vercel (free, made for Next.js):
+   - Go to https://vercel.com — sign up (GitHub).
+   - New Project → Import your GitHub repo (zaawiya-web).
+   - Environment variables (add these in Vercel project → Settings → Environment Variables):
+     - DATABASE_URL = your PostgreSQL URL (Neon/Supabase — same as .env).
+     - ADMIN_PASSWORD = your admin password (at least 8 chars).
+   - Deploy. Vercel gives you one URL, e.g. https://zaawiya-xxx.vercel.app
+
+3. Share that URL. Everyone who opens it sees the same site: home, stories, Write, delete link, like, comments, etc. No .exe — it’s a webpage; the “final” thing is this one link.
+
+4. Optional: add a custom domain in Vercel (e.g. zaawiya.com) so your one URL is your own.

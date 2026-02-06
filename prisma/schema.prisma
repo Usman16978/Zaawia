@@ -1,0 +1,57 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Prompt {
+  id    String   @id @default(cuid())
+  text  String
+  slug  String   @unique
+  order Int      @default(0)
+  stories Story[]
+}
+
+model Story {
+  id          String    @id @default(cuid())
+  content     String    @db.Text
+  promptId    String?
+  prompt      Prompt?   @relation(fields: [promptId], references: [id], onDelete: SetNull)
+  category    String?   // SAD, ROMANTIC, ANGER, HOPE, FEAR, LONELY, FAMILY, FRIENDSHIP
+  deleteToken String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  reactions  Reaction[]
+  comments   Comment[]
+  reports    Report[]
+}
+
+model Reaction {
+  id         String   @id @default(cuid())
+  storyId   String
+  story     Story    @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  type      String   // LIKE | MERE_SATH_BIHI
+  clientToken String? // anonymous token so same browser can toggle (like/unlike)
+  createdAt DateTime @default(now())
+}
+
+model Comment {
+  id          String   @id @default(cuid())
+  storyId     String
+  story       Story    @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  content     String   @db.Text
+  deleteToken String
+  createdAt   DateTime @default(now())
+}
+
+model Report {
+  id        String   @id @default(cuid())
+  storyId   String?
+  story     Story?   @relation(fields: [storyId], references: [id], onDelete: Cascade)
+  commentId String?
+  reason    String?
+  createdAt DateTime @default(now())
+}

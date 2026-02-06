@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build / Next
+.next/
+out/
+build/
+dist/
+
+# Environment (keep your Neon connection string private)
+.env
+.env.local
+.env.*.local
+
+# Prisma
+node_modules/.prisma/
+
+# Debug / IDE
+npm-debug.log*
+.DS_Store
+*.log
