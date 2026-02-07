@@ -20,11 +20,11 @@ export default function AdminPage() {
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/api/admin/me', { credentials: 'include' })
+    fetch('/api/admin/me', { credentials: 'include', cache: 'no-store' })
       .then((res) => {
         if (res.ok) {
           setIsAdmin(true);
-          return fetch('/api/stories', { credentials: 'include' }).then((r) => r.json());
+          return fetch('/api/stories', { credentials: 'include', cache: 'no-store' }).then((r) => r.json());
         }
         setIsAdmin(false);
         return [];
@@ -36,7 +36,7 @@ export default function AdminPage() {
   }, []);
 
   function loadStories() {
-    fetch('/api/stories', { credentials: 'include' })
+    fetch('/api/stories', { credentials: 'include', cache: 'no-store' })
       .then((r) => r.json())
       .then((data) => {
         if (Array.isArray(data)) setStories(data);
