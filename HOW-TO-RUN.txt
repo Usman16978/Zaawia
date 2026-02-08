@@ -21,7 +21,7 @@ ZAAWIYA WEB — HOW TO RUN (PostgreSQL / server DB)
    Then run (creates tables and generates client):
    npm run db:push
    npm run db:seed
-
+Now you have to do many things just fight
 4. Run dev server (syncs DB and starts app):
    npm run dev
 
